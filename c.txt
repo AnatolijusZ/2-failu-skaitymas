@@ -1,0 +1,4 @@
+Trecias failas
+c.txt failas
+Hello World!
+-------------------

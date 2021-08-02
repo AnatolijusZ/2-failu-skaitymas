@@ -1,0 +1,4 @@
+Pirmas failas
+a.txt failas
+Hello World!
+----------------------
