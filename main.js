@@ -1,20 +1,39 @@
-"use strict";
-
 const fs = require("fs");
-let tekstas, nuskaitimas;
-
+let tekstas;
  
 console.log("start");
  
-nuskaitimas = fs.readFileSync("a.txt", "utf8"); 
-tekstas += nuskaitimas;
+const myPromise = new Promise((resolve, reject) => {
+    fs.readFile("a.txt", (err, data) => {
+        if (err) {
+        console.log("Klaida", err);
+        return;
+        }
+        console.log("" + data);
+    });
+    resolve("Done");
+    Promise.then
+result => tekstas += data;
+});
 
-nuskaitimas = fs.readFileSync("b.txt", "utf8"); 
-tekstas += nuskaitimas;
 
-nuskaitimas = fs.readFileSync("c.txt", "utf8"); 
-tekstas += nuskaitimas;
 
-console.log(tekstas);
+ 
+fs.readFile("b.txt", (err, data) => {
+ if (err) {
+ console.log("Klaida", err);
+ return;
+ }
+ console.log("" + data);
+});
 
+fs.readFile("c.txt", (err, data) => {
+    if (err) {
+    console.log("Klaida", err);
+    return;
+    }
+    console.log("" + data);
+   });
+ 
 console.log("finish");
+console.log(tekstas);
