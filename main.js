@@ -9,7 +9,7 @@ console.log("start");
 nuskaitimas = fs.readFileSync("a.txt", "utf8"); 
 tekstas += nuskaitimas;
 
-nuskaitimas = fs.readFileSync("b.txt", "uf8"); 
+nuskaitimas = fs.readFileSync("b.txt", "utf8"); 
 tekstas += nuskaitimas;
 
 nuskaitimas = fs.readFileSync("c.txt", "utf8"); 
