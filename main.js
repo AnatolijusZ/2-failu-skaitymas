@@ -1,39 +1,68 @@
 const fs = require("fs");
-let tekstas;
+let tekstas = "";
+
  
 console.log("start");
  
-const myPromise = new Promise((resolve, reject) => {
-    fs.readFile("a.txt", (err, data) => {
-        if (err) {
-        console.log("Klaida", err);
-        return;
-        }
-        console.log("" + data);
+function readfile(name, options) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(name, options, (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(data);
+        });
     });
-    resolve("Done");
-    Promise.then
-result => tekstas += data;
-});
+}
 
-
-
- 
-fs.readFile("b.txt", (err, data) => {
- if (err) {
- console.log("Klaida", err);
- return;
- }
- console.log("" + data);
-});
-
-fs.readFile("c.txt", (err, data) => {
-    if (err) {
-    console.log("Klaida", err);
-    return;
+readfile("a.txt", {
+    encoding: "utf8"
+})
+.then(
+    data => {
+        console.log("perskaiciau is failo 'a'");
+        tekstas += data;
+        return readfile("b.txt", {
+            encoding: "utf8"
+        });
     }
-    console.log("" + data);
-   });
+)
+.catch(err => {
+    console.log("nepaviko perskaityti is failo 'a'");
+    console.log(err);
+    return readfile("b.txt", {
+        encoding: "utf8"
+    });
+})
+.then(
+    data => {
+        console.log("perskaiciau is failo 'b'");
+        tekstas += data;
+        return readfile("c.txt", {
+            encoding: "utf8"
+        });
+    }
+)
+.catch(err => {
+    console.log("nepaviko perskaityti is failo 'b'");
+    console.log(err);
+    return readfile("c.txt", {
+        encoding: "utf8"
+    });
+})
+.then(
+    data => {
+        console.log("perskaiciau is failo 'c'");
+        tekstas += data;
+        console.log (tekstas);
+    }
+)
+.catch(err => {
+    console.log("nepaviko perskaityti is failo 'c'");
+    console.log(err);
+    console.log(tekstas);
+    
+})
  
 console.log("finish");
-console.log(tekstas);
